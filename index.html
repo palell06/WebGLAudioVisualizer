@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Audio visualizer</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap.css"/>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript">
+        var visualizer = null;
+        window.onload = function(){
+            document.getElementById("message_box").style.display = 'none';
+            visualizer = new AudioVisualizer();
+            visualizer.Initialize();
+        };
+    </script>
+</head>
+<body>
+<div class="bs-component">
+   <div class="navbar navbar-default">
+       <div class="navbar-header">
+           <div id="audio_info" class="navbar-brand">
+               <a class="btn btn-default btn-file">
+                   Select a file to play <input type="file" id="_uploaded_file">
+               </a>
+           </div>
+           <span class="navbar-brand"  id="audio_status">No audio currently playing</span>
+       </div>
+       <div class="navbar-collapse collapse navbar-responsive-collapse">
+           <ul class="nav navbar-nav">
+               <li>
+                   <div class="btn-group btn-group-justified">
+                       <span class="btn btn-default" onclick="visualizer.SetCameraToOrbit();">Orbit Camera</span>
+                       <span class="btn btn-default" onclick="visualizer.SetCameraToFree();">Free Camera</span>
+                   </div>
+               </li>
+               <li>
+                   <div class="btn-group btn-group-justified">
+                       <span class="btn btn-default" onclick="visualizer.SetRendererToSimpleBar();">Render audio samples as simple bars</span>
+                       <span class="btn btn-default" onclick="visualizer.SetRendererToMultiBars();">Render audio samples as multiple bars</span>
+                       <span class="btn btn-default" onclick="visualizer.SetRendererToSurface();">Render audio samples as a surface</span>
+                   </div>
+               </li>
+               <li>
+                   <div class="btn-group btn-group-justified">
+                       <span class="btn btn-default" onclick="visualizer.Play();">Play</span>
+                       <span class="btn btn-default" onclick="visualizer.Stop();">Stop</span>
+                       <span class="btn btn-default" onclick="visualizer.Pause();">Pause</span>
+                   </div>
+               </li>
+           </ul>
+       </div>
+ </div>
+</div><!--
+<div id="file" class="file">
+   <div id="audio_info">
+       <label for="_uploaded_file">Drag or drop or select file to play</label>
+       <input type="file" id="_uploaded_file">
+   </div>
+</div>-->
+
+<div class="panel panel-danger" id="message_box">
+    <div class="panel-heading">
+        <h3 class="panel-title" id="message_box_header"></h3>
+    </div>
+    <div class="panel-body" id="message_box_content">
+
+    </div>
+</div>
+    <!-- canvas used for rendering text -->
+    <canvas id="_canvas_texture" width="1024" height="1024" style="display: none"></canvas>
+    <canvas id="_canvas" width="1280" height="720">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Your browser does not support WebGL</h3>
+            </div>
+            <div class="panel-body">
+                Your browser does not support WebGL
+            </div>
+        </div>
+
+    </canvas>
+</body>
+</html>
